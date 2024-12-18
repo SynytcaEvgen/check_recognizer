@@ -1,0 +1,22 @@
+.header{
+	background-color: rgb(149, 51, 240);
+	width: 100vw;
+	position: relative;
+	display: inline-block;
+	
+}
+.header h2{
+	margin-top: 16px;
+	margin-bottom: 35px;
+	background-color: rgb(47, 238, 9);
+}
+.small-text{
+	font-size: 10px;
+	font-weight: 600;
+	font-family: 'Courier New', Courier, monospace;
+	max-width: 200px;
+	text-align: left;
+	position: absolute;
+	bottom: 5px;
+	right: 0;
+}

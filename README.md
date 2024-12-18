@@ -1,1 +1,4 @@
-## Check Reognizer
+## Check Recognizer
+
+Powered by Gemini LLM 
+
