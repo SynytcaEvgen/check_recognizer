@@ -1,9 +1,9 @@
 version: "3.8"
 
 networks:
-  expert:
+  recognaizer:
    driver: bridge
-   name: expert
+   name: recognaizer
    external: true
 
 services:
@@ -16,36 +16,24 @@ services:
     ports:
       - "80:80"
       - "443:443"
-      - "8020:8020"
-      - "5118:5118"
     volumes:
       - /var/www/letsencrypt/:/data/letsencrypt/:ro
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
     depends_on:
       - ui
       - api
-      - instruction_expert
     networks:
-      - expert
+      - recognaizer
   ui:
     image: ${DC_IMAGE_NAME_UI}:${DC_IMAGE_TAG}
     restart: always
     depends_on:
       - api
     networks:
-      - expert
+      - recognaizer
   api:
-    image: ${DC_IMAGE_NAME_API}:${DC_IMAGE_TAG}
-    command: npm run start:${SM_STAGE}
-    restart: always
-    env_file: "./api/.env"
-    networks:
-      - expert
-  instruction_expert:
     image: ${DC_IMAGE_NAME_EXPERT}:${DC_IMAGE_TAG}
-    env_file: "./expert/.env"
+    env_file: "./api/.env"
     restart: always
-    depends_on:
-      - api
     networks:
-      - expert
+      - recognaizer

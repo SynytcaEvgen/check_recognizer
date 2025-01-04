@@ -1,21 +1,23 @@
 import React from "react";
+import './uploadImage.css';
 import ImageUploading, { ImageListType } from "react-images-uploading";
 
 export function UploadImages() {
   const [images, setImages] = React.useState([]);
-  const maxNumber = 69;
+  const maxNumber = 1;
 
   const onChange = (
     imageList: ImageListType,
     addUpdateIndex: number[] | undefined
   ) => {
     // data for submit
+    console.log(imageList);
     console.log(imageList, addUpdateIndex);
     setImages(imageList as never[]);
   };
 
   return (
-    <div className="App">
+    <div className="uploader-image">
       <ImageUploading
         multiple
         value={images}
@@ -26,8 +28,8 @@ export function UploadImages() {
           imageList,
           onImageUpload,
           onImageRemoveAll,
-          onImageUpdate,
-          onImageRemove,
+          // onImageUpdate,
+          // onImageRemove,
           isDragging,
           dragProps
         }) => (
@@ -41,14 +43,14 @@ export function UploadImages() {
               Click or Drop here
             </button>
             &nbsp;
-            <button onClick={onImageRemoveAll}>Remove all images</button>
+            <button onClick={onImageRemoveAll}>Remove image</button>
             {imageList.map((image, index) => (
               <div key={index} className="image-item">
                 <img src={image.dataURL} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
+                {/* <div className="image-item__btn-wrapper">
                   <button onClick={() => onImageUpdate(index)}>Update</button>
                   <button onClick={() => onImageRemove(index)}>Remove</button>
-                </div>
+                </div> */}
               </div>
             ))}
           </div>

@@ -1,19 +1,18 @@
-import { useState } from 'react'
-import './App.css'
-import { UploadImages } from './UploadImages'
-import { Header } from './header'
+import { useState } from 'react';
+import './App.css';
+import { UploadImages } from './component/uploadImage/UploadImages';
+import { Header } from './component/header/header';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
+    <div className='app'>
       <Header />
       <UploadImages/>
-      <div>
-        <p>React</p>
+      <div className='auth_name'>
+        <p>Yevhen Synytsia</p>
       </div>
-    </>
+    </div>
   )
 }
 
