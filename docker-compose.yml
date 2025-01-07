@@ -31,9 +31,9 @@ services:
       - api
     networks:
       - recognaizer
-  api:
+  server:
     image: ${DC_IMAGE_NAME_EXPERT}:${DC_IMAGE_TAG}
-    env_file: "./api/.env"
+    env_file: "./server/.env"
     restart: always
     networks:
       - recognaizer
