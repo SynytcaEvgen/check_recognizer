@@ -17,7 +17,7 @@ services:
       - './nginx_def_dev.conf:/etc/nginx/nginx.conf'
     depends_on:
       - ui
-      - api
+      - server
     networks:
       - recognaizer
   ui:
@@ -26,7 +26,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     depends_on:
-      - api
+      - server
     networks:
       - recognaizer
   server:

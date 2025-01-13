@@ -6,7 +6,7 @@ import ParsingResult from '../parsingResult/parsingResult';
 import Error from '../error/error';
 
 export function UploadImages() {
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<{ file: File }[]>([]);
   const [mainButton, setmainButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -16,7 +16,7 @@ export function UploadImages() {
 
   const onChange = async (
     imageList: ImageListType,
-    addUpdateIndex: number[] | undefined
+    // addUpdateIndex: number[] | undefined
   ) => {
     setImages(imageList as never[]);
     setmainButton(true);
