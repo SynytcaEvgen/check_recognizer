@@ -1,0 +1,54 @@
+.uploader-image{
+	padding: 20px 10px;
+	overflow: scroll;
+}
+.image-item{
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+.image-item img{
+	width: 100%;
+}
+.upload__image-wrapper{
+	margin: 10px 5px;
+	max-width: 600px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
+}
+.upload__image-wrapper button{
+	font-weight: 700;
+	color: white;
+}
+
+.image-item__btn-wrapper {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-item__btn-wrapper button{
+	max-width: 300px;
+	background-color: darkred;
+}
+.gen-wrapper{
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+	.image-item__btn-wrapper {
+		flex-direction: column;
+	}
+	.upload__image-wrapper{
+		flex-direction: column;
+	}
+	.image-item__btn-wrapper button{
+		width: 100%;
+		max-width: 600px;
+	}
+}

@@ -11,14 +11,10 @@ services:
     restart: always
     container_name: nginx-proxy
     image: nginx:stable-alpine
-    environment :
-      - DOMEN_NAME=ysynytsia.space
     ports:
-      - "80:80"
-      - "443:443"
+      - 3011:80
     volumes:
-      - /var/www/letsencrypt/:/data/letsencrypt/:ro
-      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      - './nginx_def_dev.conf:/etc/nginx/nginx.conf'
     depends_on:
       - ui
       - api
@@ -38,6 +34,8 @@ services:
       context: ./server
       dockerfile: Dockerfile
     env_file: "./server/.env"
+    ports: 
+      - 3001:3001
     restart: always
     networks:
       - recognaizer
