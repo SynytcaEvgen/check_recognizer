@@ -90,26 +90,28 @@ export function UploadImages() {
           
           // write your building UI
           
-          <div className="upload__image-wrapper">
-            { !mainButton ? 
-            <button
-              style={isDragging ? { color: "red" } : undefined}
-              onClick={onImageUpload}
-              {...dragProps}
-            >
-              Click or Drop here
-              </button> : null}
-            <button onClick={() => { onImageRemoveAll(); removeImage() }}>{
-              response ? 'Run again' : 'Delete image' 
-            }</button>
-            {imageList.map((image, index) => (
-              <div key={index} className="image-item">
-                <img src={image.dataURL} alt="" width="100" />
-                <div className="image-item__btn-wrapper">
-                  {response ? <br></br> : <button  onClick={handleSubmit}>Recognize</button>}
+          <div className='gen-wrapper'>
+            <div className="upload__image-wrapper">
+              {!mainButton ?
+                <button
+                  style={isDragging ? { color: "red" } : undefined}
+                  onClick={onImageUpload}
+                  {...dragProps}
+                >
+                  Click or Drop here
+                </button> : null}
+              <button onClick={() => { onImageRemoveAll(); removeImage(); } }>{response ? 'Run again' : 'Delete image'}</button>
+            </div>
+            <div className='upload__image-wrapper'>
+              {imageList.map((image, index) => (
+                <div key={index} className="image-item">
+                  <img src={image.dataURL} alt="" width="100" />
+                  <div className="image-item__btn-wrapper">
+                    {response ? <br></br> : <button onClick={handleSubmit}>Recognize</button>}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
       </ImageUploading>

@@ -14,9 +14,9 @@
 	margin: 10px 5px;
 	max-width: 600px;
 	margin: 0 auto;
-}
-.upload__image-wrapper button:first-child{
-	margin-bottom: 15px;
+	display: flex;
+	justify-content: center;
+	gap: 20px;
 }
 .upload__image-wrapper button{
 	font-weight: 700;
@@ -34,14 +34,17 @@
 	max-width: 300px;
 	background-color: darkred;
 }
-
+.gen-wrapper{
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
 
 @media only screen and (max-width: 600px) {
 	.image-item__btn-wrapper {
 		flex-direction: column;
 	}
 	.upload__image-wrapper{
-		display: flex;
 		flex-direction: column;
 	}
 	.image-item__btn-wrapper button{
