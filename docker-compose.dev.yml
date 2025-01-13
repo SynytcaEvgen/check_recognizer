@@ -12,12 +12,9 @@ services:
     container_name: nginx-proxy
     image: nginx:stable-alpine
     ports:
-      # - "80:80"
-      # - "443:443"
-      - "3002:3002"
-    # volumes:
-    #   - /var/www/letsencrypt/:/data/letsencrypt/:ro
-    #   - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      - 3011:80
+    volumes:
+      - './nginx_def_dev.conf:/etc/nginx/nginx.conf'
     depends_on:
       - ui
       - api

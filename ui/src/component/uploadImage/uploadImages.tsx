@@ -48,7 +48,7 @@ export function UploadImages() {
     try {
       setError(false);
       // Send the form data to the server
-      const fetching = await fetch('http://192.168.1.131:3001/upload', {
+      const fetching = await fetch('api/upload', {
         method: 'POST',
         body: formData,
         headers: {
