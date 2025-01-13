@@ -13,10 +13,15 @@ import {
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
-import { validator } from './service/index';
+import { LoggerProvider, validator } from './service/index';
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly appService: AppService,
+    private logger: LoggerProvider,
+  ) {
+    this.logger = new LoggerProvider(AppController.name);
+  }
 
   @Get()
   healthCheck(@Req() req: Request) {
@@ -57,7 +62,7 @@ export class AppController {
     if (!validator(req)) {
       throw new BadRequestException('Very bad request');
     }
-    await this.appService.googleAiService(image.buffer);
-    return 'done';
+    this.logger.debug('File uploaded successfully');
+    return await this.appService.googleAiService(image.buffer);;
   }
 }

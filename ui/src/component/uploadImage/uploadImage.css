@@ -3,17 +3,20 @@
 	overflow: scroll;
 }
 .image-item{
-	margin-top: 15px;
-	margin-bottom: 15px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
 }
 .image-item img{
 	width: 100%;
-	margin-bottom: 10px;
 }
 .upload__image-wrapper{
 	margin: 10px 5px;
 	max-width: 600px;
 	margin: 0 auto;
+}
+.upload__image-wrapper button:first-child{
+	margin-bottom: 15px;
 }
 .upload__image-wrapper button{
 	font-weight: 700;
@@ -29,7 +32,7 @@
 
 .image-item__btn-wrapper button{
 	max-width: 300px;
-	
+	background-color: darkred;
 }
 
 

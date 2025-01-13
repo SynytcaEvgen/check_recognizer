@@ -11,14 +11,13 @@ services:
     restart: always
     container_name: nginx-proxy
     image: nginx:stable-alpine
-    environment :
-      - DOMEN_NAME=atndev.site
     ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/www/letsencrypt/:/data/letsencrypt/:ro
-      - /etc/letsencrypt/:/etc/letsencrypt/:ro
+      # - "80:80"
+      # - "443:443"
+      - "3002:3002"
+    # volumes:
+    #   - /var/www/letsencrypt/:/data/letsencrypt/:ro
+    #   - /etc/letsencrypt/:/etc/letsencrypt/:ro
     depends_on:
       - ui
       - api

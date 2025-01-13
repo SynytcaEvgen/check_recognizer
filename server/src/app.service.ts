@@ -49,7 +49,7 @@ export class AppService {
       },
       prompt_text,
     ]);
-    console.log(result.response.text());
-    return 'done';
+    const jsonMatch = result.response.text().match(/{[\s\S]*}/);
+    return  JSON.parse(jsonMatch[0]);
   }
 }
