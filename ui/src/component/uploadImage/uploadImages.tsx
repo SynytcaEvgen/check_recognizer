@@ -48,7 +48,8 @@ export function UploadImages() {
     try {
       setError(false);
       // Send the form data to the server
-      const fetching = await fetch('api/upload', {
+      const path = '/api/upload/';
+      const fetching = await fetch(path, {
         method: 'POST',
         body: formData,
         headers: {

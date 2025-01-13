@@ -12,7 +12,7 @@ services:
     container_name: nginx-proxy
     image: nginx:stable-alpine
     environment :
-      - DOMEN_NAME=atndev.site
+      - DOMEN_NAME=ysynytsia.space
     ports:
       - "80:80"
       - "443:443"
@@ -33,7 +33,7 @@ services:
       - api
     networks:
       - recognaizer
-  server:
+  api:
     build:
       context: ./server
       dockerfile: Dockerfile
