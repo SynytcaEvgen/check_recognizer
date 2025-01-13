@@ -44,18 +44,24 @@ export function UploadImages() {
     formData.append('image', images[0].file);
 
     setLoading(true);
-    console.log(event)
+ 
     try {
+      setError(false);
       // Send the form data to the server
-      const response = await fetch('http://192.168.1.131:3001/upload', {
+      const fetching = await fetch('http://192.168.1.131:3001/upload', {
         method: 'POST',
         body: formData,
         headers: {
           'check':'123456'
         }
       });
-      const data = await response.json();
-      setResponse(data);
+      const data = await fetching.json();
+      const response = await fetching;
+      if (response.ok) {
+        setResponse(data);
+      } else { 
+         setError(true);
+      }
     } catch (error) {
       setError(true);
       console.error('Error uploading the file:', error);
@@ -72,7 +78,7 @@ export function UploadImages() {
   return (
     <div className="uploader-image">
       {loading && <Spinner />}
-      {error && <Error textError='Server connection error' />}
+      {error && <Error textError='Server error, please try again later' />}
       <ImageUploading
         value={images}
         onChange={onChange}
@@ -82,8 +88,6 @@ export function UploadImages() {
           imageList,
           onImageUpload,
           onImageRemoveAll,
-          // onImageUpdate,
-          // onImageRemove,
           isDragging,
           dragProps
         }) => (

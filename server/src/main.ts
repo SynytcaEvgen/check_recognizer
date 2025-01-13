@@ -17,7 +17,7 @@ async function start() {
     logger,
     rawBody: true,
   });
-
+  app.set('trust proxy', 'loopback');
   app.use(helmet.crossOriginResourcePolicy({ policy: 'cross-origin' }));
   app.use(helmet.hidePoweredBy()); //change value of X-Powered-By header to given value
   app.use(helmet.noSniff()); // set X-Content-Type-Options header

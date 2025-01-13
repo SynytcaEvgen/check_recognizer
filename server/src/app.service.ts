@@ -39,7 +39,11 @@ export class AppService {
       		total_price: "total price"
       	],
       	total_price: "total price"
-      }`;
+      }
+      If you cannot recognize the image as a check, please return it as JSON with empty fields
+      and on the field the "company name" write - "This photo can't be recognized as the check,
+      please remake a photo."`;
+
     const result = await model.generateContent([
       {
         inlineData: {
@@ -50,6 +54,6 @@ export class AppService {
       prompt_text,
     ]);
     const jsonMatch = result.response.text().match(/{[\s\S]*}/);
-    return  JSON.parse(jsonMatch[0]);
+    return JSON.parse(jsonMatch[0]);
   }
 }
