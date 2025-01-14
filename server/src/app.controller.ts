@@ -29,13 +29,12 @@ export class AppController {
   }
 
   @Get()
-  @UseFilters(ThrottlerExceptionFilter)
-  @UseGuards(ThrottlerGuard)
-  @Throttle({ default: { limit: 2, ttl: 60000 } })
   healthCheck(@Req() req: Request) {
     if (!validator(req)) {
       throw new BadRequestException('Very bad request');
     }
+    this.logger.debug(req.headers.host, 'Host');
+    this.logger.debug(req.headers['user-agent'], 'Client');
     return this.appService.healthCheck();
   }
 
@@ -65,6 +64,8 @@ export class AppController {
       throw new BadRequestException('Very bad request');
     }
     this.logger.debug('File uploaded successfully');
+    this.logger.debug(req.headers.host, 'Host');
+    this.logger.debug(req.headers['user-agent'], 'Client');
     return await this.appService.googleAiService(image.buffer);
   }
 }
