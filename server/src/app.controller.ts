@@ -64,8 +64,9 @@ export class AppController {
       throw new BadRequestException('Very bad request');
     }
     this.logger.debug('File uploaded successfully');
-    this.logger.debug(req.headers.host, 'Host');
+    this.logger.debug(req.headers['x-real-ip'], 'IP');
     this.logger.debug(req.headers['user-agent'], 'Client');
+    console.log(req.headers);
     return await this.appService.googleAiService(image.buffer);
   }
 }
