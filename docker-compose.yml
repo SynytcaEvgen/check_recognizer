@@ -19,7 +19,7 @@ services:
     volumes:
       - /var/www/letsencrypt/:/data/letsencrypt/:ro
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
-      - './nginx_def.conf:/etc/nginx/nginx.conf'
+      - ./nginx_def.conf:/etc/nginx/nginx.conf
     depends_on:
       - ui
       - api
