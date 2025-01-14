@@ -63,10 +63,13 @@ export class AppController {
     if (!validator(req)) {
       throw new BadRequestException('Very bad request');
     }
-    this.logger.debug('File uploaded successfully');
+
+    this.logger.debug('---------------------Start------------------------');
     this.logger.debug(req.headers['x-real-ip'], 'IP');
     this.logger.debug(req.headers['user-agent'], 'Client');
-    console.log(req.headers);
+    this.logger.debug(req.headers['sec-ch-ua-platform'], 'Platform');
+    this.logger.debug('---------------------End---------------------------');
+
     return await this.appService.googleAiService(image.buffer);
   }
 }
