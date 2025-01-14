@@ -10,7 +10,8 @@ services:
   nginx:
     restart: always
     container_name: nginx-proxy
-    image: nginx:stable-alpine
+    build:
+      context: .
     environment :
       - DOMEN_NAME=ysynytsia.space
     ports:
@@ -19,7 +20,6 @@ services:
     volumes:
       - /var/www/letsencrypt/:/data/letsencrypt/:ro
       - /etc/letsencrypt/:/etc/letsencrypt/:ro
-      - ./nginx_def.conf:/etc/nginx/templates/default.conf.template
     depends_on:
       - ui
       - api
