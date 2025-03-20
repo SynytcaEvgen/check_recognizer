@@ -58,9 +58,15 @@ export class AppController {
     @Req() req: Request,
   ) {
     if (!image.buffer.byteLength) {
+      this.logger.error('huge buffer data');
       throw new BadRequestException('Very bad request');
     }
     if (!validator(req)) {
+      this.logger.error('service validation error');
+      throw new BadRequestException('Very bad request');
+    }
+    if (req.headers['x-data'] !== 'domestic') {
+      this.logger.error('domestic service validation error');
       throw new BadRequestException('Very bad request');
     }
 
