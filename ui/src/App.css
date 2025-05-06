@@ -31,6 +31,9 @@
   padding: 8px;
   font-weight: 600;
 }
+.auth_name p {
+  color: #fff;
+}
 
 @keyframes logo-spin {
   from {

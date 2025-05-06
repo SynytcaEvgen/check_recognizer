@@ -1,6 +1,9 @@
 .uploader-image{
 	padding: 20px 10px;
 	overflow: scroll;
+	overflow-x: hidden;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
 .image-item{
 	display: flex;

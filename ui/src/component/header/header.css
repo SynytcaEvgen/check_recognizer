@@ -11,6 +11,7 @@
 	margin-bottom: 10px;
 	background-color: #C45FA0;
 	position: relative;
+	color: #fff;
 }
 .header h2::after {
 	position: absolute;
