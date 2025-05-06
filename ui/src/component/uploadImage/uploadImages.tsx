@@ -77,7 +77,7 @@ export function UploadImages() {
   
   
   return (
-    <div className="uploader-image">
+    <div className="uploader-image" style={images[0] ? { overflowY: "scroll" } : { overflowY: "hidden" }}>
       {loading && <Spinner />}
       {error && <Error textError='Server error, please try again later' />}
       <ImageUploading
