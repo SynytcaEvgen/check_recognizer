@@ -20,4 +20,13 @@ export const MAIN_CONFIG = new (class {
   get check(): string {
     return process.env.CHECK;
   }
+  get azureOpenAIKey(): string {
+    return process.env.AZURE_OPENAI_KEY;
+  }
+  get azureOpenAIEndpoint(): string {
+    return process.env.AZURE_OPENAI_ENDPOINT;
+  }
+  get azureOpenAIDevName(): string {
+    return process.env.AZURE_OPENAI_DEPLOYMENT_NAME;
+  }
 })();

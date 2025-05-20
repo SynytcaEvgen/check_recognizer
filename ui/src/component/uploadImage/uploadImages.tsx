@@ -4,9 +4,11 @@ import ImageUploading, { ImageListType } from "react-images-uploading";
 import { Spinner } from '../spinner/spinner';
 import ParsingResult from '../parsingResult/parsingResult';
 import Error from '../error/error';
+import { SelectModel } from '../selectModel/selectModel';
 
 export function UploadImages() {
   const [images, setImages] = useState<{ file: File }[]>([]);
+  const [selectedValue, setSelectedValue] = useState<string>('gpt_4o');
   const [mainButton, setmainButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [response, setResponse] = useState(null);
@@ -29,8 +31,10 @@ export function UploadImages() {
     setmainButton(false);
     setResponse(null);
   }
-   
-  
+
+  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedValue(event.target.value);
+  } 
   const handleSubmit = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
 
@@ -42,9 +46,10 @@ export function UploadImages() {
     // Create FormData object and append the file
     const formData = new FormData();
     formData.append('image', images[0].file);
+    formData.append('model', selectedValue);
 
     setLoading(true);
- 
+
     try {
       setError(false);
       // Send the form data to the server
@@ -96,6 +101,10 @@ export function UploadImages() {
           // write your building UI
           
           <div className='gen-wrapper'>
+            <SelectModel
+              value={selectedValue}
+              handleChange={handleChange}
+            />
             <div className="upload__image-wrapper">
               {!mainButton ?
                 <button
@@ -107,6 +116,7 @@ export function UploadImages() {
                 </button> : null}
               <button onClick={() => { onImageRemoveAll(); removeImage(); } }>{response ? 'Run again' : 'Delete image'}</button>
             </div>
+            
             <div className='upload__image-wrapper'>
               {imageList.map((image, index) => (
                 <div key={index} className="image-item">
