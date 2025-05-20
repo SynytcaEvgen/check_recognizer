@@ -107,6 +107,13 @@ export function UploadImages() {
                 </button> : null}
               <button onClick={() => { onImageRemoveAll(); removeImage(); } }>{response ? 'Run again' : 'Delete image'}</button>
             </div>
+            <label>
+              Chose pleace LLM model
+              <select name="selectedFruit">
+                <option value="gemini_15_pro">Gemini 1.5pro(Google)</option>
+                <option value="gpt_4o" selected>GPT-4o(Microsoft Azure Service)</option>
+              </select>
+            </label>
             <div className='upload__image-wrapper'>
               {imageList.map((image, index) => (
                 <div key={index} className="image-item">

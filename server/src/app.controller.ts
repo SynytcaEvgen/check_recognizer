@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  InternalServerErrorException,
   Controller,
   FileTypeValidator,
   Get,
@@ -40,8 +41,8 @@ export class AppController {
 
   @Post('upload')
   @UseFilters(ThrottlerExceptionFilter)
-  @UseGuards(ThrottlerGuard)
-  @Throttle({ default: { limit: 2, ttl: 60000 } })
+  // @UseGuards(ThrottlerGuard)
+  // @Throttle({ default: { limit: 2, ttl: 60000 } })
   @UseInterceptors(FileInterceptor('image'))
   async uploadPicture(
     @UploadedFile(
@@ -75,7 +76,12 @@ export class AppController {
     this.logger.debug(req.headers['user-agent'], 'Client');
     this.logger.debug(req.headers['sec-ch-ua-platform'], 'Platform');
     this.logger.debug('---------------------End---------------------------');
-
-    return await this.appService.googleAiService(image.buffer);
+    try {
+      // return await this.appService.googleAiService(image.buffer);
+      return await this.appService.microsoftAzureAiService(image.buffer);
+    } catch (error) {
+      this.logger.error(error);
+      throw new InternalServerErrorException('Internal Server Error');
+    }
   }
 }
