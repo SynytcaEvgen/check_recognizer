@@ -17,10 +17,9 @@ import {
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Request } from 'express';
-import { LoggerProvider, validator } from './service/index';
+import { LoggerProvider, validator, LLMmodel } from './service/index';
 import { ThrottlerExceptionFilter } from './service/filter/throttler-exception.filter';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
-import { LLMmodel } from './service/llmMolde.enum';
 
 @Controller()
 export class AppController {
@@ -78,6 +77,7 @@ export class AppController {
     this.logger.debug(req.headers['x-real-ip'], 'IP');
     this.logger.debug(req.headers['user-agent'], 'Client');
     this.logger.debug(req.headers['sec-ch-ua-platform'], 'Platform');
+    this.logger.debug(model, 'LLM Model');
     this.logger.debug('---------------------End---------------------------');
 
     try {
