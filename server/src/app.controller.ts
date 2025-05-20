@@ -12,6 +12,7 @@ import {
   UseFilters,
   UseGuards,
   UseInterceptors,
+  Body,
 } from '@nestjs/common';
 import { AppService } from './app.service';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -19,6 +20,7 @@ import { Request } from 'express';
 import { LoggerProvider, validator } from './service/index';
 import { ThrottlerExceptionFilter } from './service/filter/throttler-exception.filter';
 import { Throttle, ThrottlerGuard } from '@nestjs/throttler';
+import { LLMmodel } from './service/llmMolde.enum';
 
 @Controller()
 export class AppController {
@@ -41,8 +43,8 @@ export class AppController {
 
   @Post('upload')
   @UseFilters(ThrottlerExceptionFilter)
-  // @UseGuards(ThrottlerGuard)
-  // @Throttle({ default: { limit: 2, ttl: 60000 } })
+  @UseGuards(ThrottlerGuard)
+  @Throttle({ default: { limit: 2, ttl: 60000 } })
   @UseInterceptors(FileInterceptor('image'))
   async uploadPicture(
     @UploadedFile(
@@ -56,6 +58,7 @@ export class AppController {
       }),
     )
     image: Express.Multer.File,
+    @Body('model') model: LLMmodel,
     @Req() req: Request,
   ) {
     if (!image.buffer.byteLength) {
@@ -76,9 +79,14 @@ export class AppController {
     this.logger.debug(req.headers['user-agent'], 'Client');
     this.logger.debug(req.headers['sec-ch-ua-platform'], 'Platform');
     this.logger.debug('---------------------End---------------------------');
+
     try {
-      // return await this.appService.googleAiService(image.buffer);
-      return await this.appService.microsoftAzureAiService(image.buffer);
+      if (model === LLMmodel.GEMINI_15pro) {
+        return await this.appService.googleAiService(image.buffer);
+      }
+      if (model === LLMmodel.GPT_4o) {
+        return await this.appService.microsoftAzureAiService(image.buffer);
+      }
     } catch (error) {
       this.logger.error(error);
       throw new InternalServerErrorException('Internal Server Error');
